@@ -260,10 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h1><span>Freelancer Dashboard</span></h1>
     </div>
     
-    <div class="nav">
-        <a href="#" onclick="showForm('browse-job')">Browse Job</a>
-        <a href="#" onclick="showForm('notifications')">Notifications</a>
-    </div>
+
     
     <div class="content">
         <div id="browse-job" class="form-container">
@@ -286,6 +283,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 </div>
+<div class="nav">
+        <a href="#" onclick="showForm('browse-job')">Browse Job</a>
+        <a href="#" onclick="showForm('notifications')">Notifications</a>
+    </div>
 
 <script>
     function showForm(formId) {
