@@ -1,0 +1,96 @@
+/* ----------------------------------------------Container------------------------------------- */
+
+#container {
+  padding: 5px;
+  margin-top: 130px; /* Adjust based on your fixed navbar height */
+  margin-bottom: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+ 
+}
+
+/* ----------------------------------------------Form------------------------------------- */
+
+.register-form {
+  margin: 0 auto;
+  padding-top: 30px;
+  padding: 50px 50px; /* More padding for a spacious look */
+  border: 5px solid #6a746a; /* Lighter border */
+  border-radius: 8px; /* More rounded corners */
+  width: 100%;
+  max-width: 420px; /* Maximum width for larger screens */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-top: 370px;
+  
+  
+}
+
+.register-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  color: #333; /* Darker color for the heading */
+  padding-bottom: 5px;
+}
+
+.register-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: medium;
+   /* Slightly lighter color for labels */
+}
+
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="password"],
+.register-form textarea,
+.register-form select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 3px solid #ccc; /* Lighter border */
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 15px; /* More space between fields */
+  font-size: 12px; /* Uniform font size */
+  background-color: #e8f0fe;
+}
+
+.register-form textarea {
+  resize: vertical;
+}
+
+.register-form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem; /* Uniform font size */
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.register-form button:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
+}
+
+.register-form a {
+  text-decoration: none;
+  color: #333;
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+  font-size: 0.9rem; /* Slightly smaller font for links */
+}
+
+.freelancer-only, .employer-only {
+  display: none; /* Hidden by default, shown based on user type selection */
+}
+
