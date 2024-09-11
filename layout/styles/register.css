@@ -1,47 +1,203 @@
-/* ----------------------------------------------Container------------------------------------- */
+@charset "utf-8";
 
-#container {
-  padding: 5px;
-  margin-top: 130px; /* Adjust based on your fixed navbar height */
-  margin-bottom: 150px;
+/* Importing Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  background: linear-gradient(135deg, #4caf50, #a5d6f6); /* Green to Light Blue Gradient */
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Link Styling */
+a {
+  outline: none;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #4caf50;
+}
+
+/* Image Styling */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border: none;
+}
+
+/* Clearfix */
+.clear:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Wrapper Styling */
+
+.wrapper .row2 {
+  background-color: #4caf50;
+  color: #ffffff;
+  width: 100%;
+}
+/* Header Styling */
+#header {
+  padding: 0;
+  background-color: #4caf50;
+  border-radius: 10px 10px 0px 0px;
+  color: #ffffff;
+}
+#header {
+  padding: 60px 0 30px 0;
+} 
+#header h1,
+#header p,
+#header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#header h1 a {
+  text-align: center;
+  font-size: 2.5rem;
+  font-variant: small-caps;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 2px;
+  padding: 0 40px;
+}
+#header p {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.pages{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+/* Navbar Styling */
+#topnav {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
- 
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 15px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* ----------------------------------------------Form------------------------------------- */
+#topnav ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
+#topnav li {
+  margin: 0 15px;
+}
+
+#topnav li a {
+  color: #ffffff;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.image-container{
+  flex:1;
+  width: 50%;
+}
+.image-container img{
+  width: 100%;
+  position:fixed;
+  bottom:10%;
+  width: 60%;
+}
+.main-content{
+  flex:1;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+}
+#topnav li a:hover,
+#topnav li.active a {
+  background-color: #4caf50;
+}
+
+/* Main Container for Register Page */
+#container {
+  padding: 80px 15px 60px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-container {
+  text-align: center;
+}
+
+.register-container span {
+  margin-right: 5px;
+}
+
+.register-container a {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+/* Register Form Styling */
 .register-form {
   margin: 0 auto;
-  padding-top: 30px;
-  padding: 50px 50px; /* More padding for a spacious look */
-  border: 5px solid #6a746a; /* Lighter border */
-  border-radius: 8px; /* More rounded corners */
+  border: 1px solid #ddd;
+  border-radius: 10px;
   width: 100%;
-  max-width: 420px; /* Maximum width for larger screens */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  margin-top: 370px;
-  
-  
+  max-width: 800px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.register-form .form-content {
+  padding: 40px;
 }
 
 .register-form h2 {
   text-align: center;
+  font-size: 2.5rem;
   margin-bottom: 20px;
   text-transform: uppercase;
-  font-size: 2.5rem;
-  color: #333; /* Darker color for the heading */
-  padding-bottom: 5px;
+  color: #4caf50;
+  border-bottom: 2px solid #4caf50;
+  padding-bottom: 10px;
 }
 
 .register-form label {
   display: block;
-  margin-bottom: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
   font-weight: bold;
-  font-size: medium;
-   /* Slightly lighter color for labels */
 }
 
 .register-form input[type="text"],
@@ -51,13 +207,13 @@
 .register-form select {
   display: block;
   width: 100%;
-  padding: 10px;
-  border: 3px solid #ccc; /* Lighter border */
-  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
   box-sizing: border-box;
-  margin-bottom: 15px; /* More space between fields */
-  font-size: 12px; /* Uniform font size */
-  background-color: #e8f0fe;
+  font-size: 16px;
+  background-color: #f9f9f9;
 }
 
 .register-form textarea {
@@ -65,32 +221,50 @@
 }
 
 .register-form button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
   width: 100%;
-  font-size: 1rem; /* Uniform font size */
-  margin-top: 10px;
+  padding: 12px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
   font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .register-form button:hover {
-  background-color: #45a049; /* Slightly darker green on hover */
+  background-color: #45a049;
 }
 
 .register-form a {
-  text-decoration: none;
-  color: #333;
-  margin-top: 20px;
   display: block;
   text-align: center;
-  font-size: 0.9rem; /* Slightly smaller font for links */
+  color: #333;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
-.freelancer-only, .employer-only {
-  display: none; /* Hidden by default, shown based on user type selection */
+/* Responsive Design */
+@media (max-width: 768px) {
+  #container {
+    padding: 20px;
+  }
+
+  .register-form {
+    width: 100%;
+    padding: 20px;
+  }
+
+}
+@media (max-width: 1512px) {
+ img { display: none; }
+ .main-content{
+  flex:1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
+}

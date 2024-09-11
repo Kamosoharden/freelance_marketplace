@@ -1,46 +1,46 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>Freelance Marketplace</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link rel="stylesheet" href="./../layout/styles/freelancerlogin.css" type="text/css" />
-<script type="text/javascript" src="layout/scripts/jquery.min.js"></script>
-<script type="text/javascript" src="layout/scripts/jquery-s3slider.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#featured_slide_").s3Slider({
-		timeOut:10000 
-	});
-});
-</script>
-</head>
-<body id="top">
-
-<div class="wrapper row2">
-  <div id="header" class="clear">
-    <div class="fl_left">
-      <h1><a href="./../index.html">Freelance Marketplace</a></h1>
-      <p>Connecting Talent with Opportunity</p>
-    </div>
-    <div class="fl_right">
-      <p> <a href="freelancerlogin.html">Freelancer Login</a> &nbsp; | &nbsp; <a href="employerlogin.html">Employer Login</a> &nbsp; | &nbsp; <a href="#">Sign Up</a> </p>
-    </div>
-  </div>
-</div>
-<br><br><br>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freelance Marketplace - Signup</title>
-    <link rel="stylesheet" href="./../layout/styles/register.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="./../layout/styles/register.css">
+    <script type="text/javascript" src="layout/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="layout/scripts/jquery-s3slider.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#featured_slide_").s3Slider({
+                timeOut: 10000
+            });
+        });
+    </script>
 </head>
-<body>
+<body id="top">
+
+
+<div class="main-content">
+    <div class="image-container">
+        <img src="./../layout/images/hero_auth.png" alt="Hero Image" class="hero-image">
+    </div>
     <div id="container">
+        
         <form class="register-form" method="POST" action="signup_process.php">
-            <h2>Signup</h2>
+            <div class="wrapper row2">
+                <div id="header" class="clear">
+                    <div class="fl_left">
+                        <h1><a href="./../index.html">Freelance Marketplace</a></h1>
+                        <p>Connecting Talent with Opportunity</p>
+                    </div>
+                    <div class="fl_right">
+                        <div class="pages"><a href="freelancerlogin.html">Freelancer Login</a> &nbsp; | &nbsp; 
+                        <a href="employerlogin.html">Employer Login</a> &nbsp; | &nbsp; 
+                        <a href="#" class="current">Sign Up</a></div>
+                    </div>
+                </div>
+            </div>
     
-            <label for="user-type">I am a:</label>
+            <div class="form-content">
+                <label for="user-type">I am a:</label>
             <select id="user-type" name="user_type" required>
                 <option value="freelancer">Freelancer</option>
                 <option value="employer">Employer</option>
@@ -63,7 +63,6 @@ $(document).ready(function() {
     
             <label for="profile-description">Profile Description</label>
             <textarea id="profile-description" name="profile_description" rows="8" required></textarea>
-    
     
             <label for="degree">Degree</label>
             <select id="degree" name="degree">
@@ -99,18 +98,18 @@ $(document).ready(function() {
     
             <label for="skills" class="freelancer-only">Skills</label>
             <textarea id="skills" name="skills" rows="8" required></textarea>
-            
     
             <label for="company-name" class="employer-only">Company Name</label>
-            <input type="text" id="company-name" name="company-name" class="employer-only">
+            <input type="text" id="company-name" name="company_name" class="employer-only">
     
             <button class="freelancer-only" type="submit" name="register_freelancer">Register</button>
             <button class="employer-only" type="submit" name="register_employer">Register Employer</button>
             <a href="freelancerlogin.html">Already have an account? Login here</a>
+            </div>
         </form>
     </div>
     
-
+</div>
     <script>
         document.getElementById('user-type').addEventListener('change', function() {
             const userType = this.value;
