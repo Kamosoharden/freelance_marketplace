@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
-            margin-top: 100px;
+            margin-top: 20px;
         }
 
         .btn:hover {
