@@ -11,6 +11,131 @@ Licence URI: http://www.os-templates.com/template-terms
 <title>Freelance Marketplace | Contact Us</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" href="../layout/styles/layout.css" type="text/css" />
+<style>
+  /* General Styles */
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      color: #333;
+  }
+
+  header {
+      background-color: #0073e6;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+  }
+
+  header h1 {
+      margin: 0;
+  }
+
+  .container {
+      width: 80%;
+      margin: auto;
+      overflow: hidden;
+  }
+
+  /* Sections */
+  section {
+      padding: 20px;
+      background-color: #fff;
+      margin: 20px 0;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+  }
+
+  section h2 {
+      color: #0073e6;
+      margin-bottom: 10px;
+  }
+
+  /* Who is Concerned */
+  .who-is-concerned {
+      display: flex;
+      justify-content: space-between;
+  }
+
+  .who-is-concerned div {
+      width: 30%;
+  }
+
+  .who-is-concerned div h3 {
+      color: #333;
+      margin-bottom: 5px;
+  }
+
+  /* Interests */
+  .interests {
+      display: flex;
+      flex-wrap: wrap;
+  }
+
+  .interests div {
+      width: 45%;
+      margin: 10px;
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .interests div h3 {
+      color: #0073e6;
+  }
+
+  /* Resources */
+  .resources ul {
+      list-style: none;
+      padding: 0;
+  }
+
+  .resources ul li {
+      padding: 10px;
+      background-color: #f9f9f9;
+      margin: 10px 0;
+      border-left: 5px solid #0073e6;
+  }
+
+  .resources ul li a {
+      text-decoration: none;
+      color: #0073e6;
+      font-weight: bold;
+  }
+
+  /* Footer */
+  footer {
+      background-color: #0073e6;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+  }
+
+  footer a {
+      color: #fff;
+      text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+      .who-is-concerned {
+          flex-direction: column;
+      }
+
+      .who-is-concerned div {
+          width: 100%;
+          margin-bottom: 20px;
+      }
+
+      .interests div {
+          width: 100%;
+      }
+  }
+</style>
+
 </head>
 <body id="top">
 <div class="wrapper row1">
@@ -23,11 +148,6 @@ Licence URI: http://www.os-templates.com/template-terms
     </ul>
   </div>
 </div>
-<!-- ####################################################################################################### -->
-
-<!-- ####################################################################################################### -->
-
-<!-- ####################################################################################################### -->
 
 <div class="wrapper row4" style="background-color: #f2f2f2; padding: 40px 0; padding-bottom: 10px; margin-top: -20px;">
   <div id="quicknav" class="clear" style="margin-bottom: 20px;">
@@ -35,7 +155,99 @@ Licence URI: http://www.os-templates.com/template-terms
       <strong>Community & Resources</strong>
     </h1>
   </div>
+</div><br>
+
+
+<div class="container">
+  <section>
+      <h2>Overview</h2>
+      <p>Welcome to the community and resources page for <strong>FREELANCE MARKETPLACE</strong>, dedicated to supporting freelancers, clients, and stakeholders in Rwanda's growing freelance economy.</p>
+  </section>
+
+  <section>
+      <h2>Who is Concerned?</h2>
+      <div class="who-is-concerned">
+          <div>
+              <h3>Freelancers</h3>
+              <p>Independent professionals offering skills in software development, design, writing, and more.</p>
+          </div>
+          <div>
+              <h3>Clients</h3>
+              <p>Businesses and individuals seeking freelance services for projects ranging from web development to content creation.</p>
+          </div>
+          <div>
+              <h3>Supporting Organizations</h3>
+              <p>Government bodies, NGOs, and educational institutions fostering skills development and entrepreneurship.</p>
+          </div>
+      </div>
+  </section>
+
+  <section>
+      <h2>Interests and Benefits</h2>
+      <div class="interests">
+          <div>
+              <h3>For Freelancers</h3>
+              <ul>
+                  <li>Access to diverse project opportunities.</li>
+                  <li>Networking and collaboration with peers.</li>
+                  <li>Skill development resources (training, workshops).</li>
+                  <li>Payment security and dispute resolution mechanisms.</li>
+              </ul>
+          </div>
+
+          <div>
+              <h3>For Clients</h3>
+              <ul>
+                  <li>Access to a pool of skilled freelancers.</li>
+                  <li>Efficient project management tools.</li>
+                  <li>Quality assurance and review systems.</li>
+                  <li>Local talent pool for specialized projects.</li>
+              </ul>
+          </div>
+
+          <div>
+              <h3>For Supporting Organizations</h3>
+              <ul>
+                  <li>Promoting digital skills and entrepreneurship.</li>
+                  <li>Facilitating partnerships and industry collaborations.</li>
+                  <li>Monitoring market trends and policy advocacy.</li>
+              </ul>
+          </div>
+      </div>
+  </section>
+
+  <section>
+      <h2>Resources</h2>
+      <div class="resources">
+          <ul>
+              <li><a href="#">Skill Development Resources</a>: Online courses, local workshops, and certifications.</li>
+              <li><a href="#">Project Management Tools</a>: Platforms for seamless collaboration and communication.</li>
+              <li><a href="#">Legal and Financial Guidance</a>: Contract templates, tax guidelines, and financial planning tips.</li>
+              <li><a href="#">Community Support</a>: Mentorship, forums, and networking opportunities.</li>
+          </ul>
+      </div>
+  </section>
+
+  <section>
+      <h2>Local Insights and Opportunities</h2>
+      <p>Discover trends in freelance services in Rwanda, explore local opportunities, and get inspired by success stories of freelancers in the region.</p>
+  </section>
+
+  <section>
+      <h2>Get Involved</h2>
+      <ul>
+          <li>Register as a freelancer or client and join the community.</li>
+          <li>Contribute to the platform by sharing your expertise in articles or webinars.</li>
+          <li>Provide feedback to help us improve the platform and enhance engagement.</li>
+      </ul>
+  </section>
 </div>
+<!-- ####################################################################################################### -->
+
+<!-- ####################################################################################################### -->
+
+<!-- ####################################################################################################### -->
+
 
 
 
