@@ -15,8 +15,11 @@ File: Layout CSS
 @import url("gallery.css");
 @import url("portfolio.css");
 @import url("featured_slide.css");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+
 html { overflow-y: scroll; }
-body { margin: 0; padding: 0; font-size: 13px; font-family: cursive; color: #333333; background-color: #C8CCCF; }
+body { margin: 0; padding: 0; font-size: 13px; font-family: "Poppins", sans-serif; color: #333333; background-color: #C8CCCF; }
 
 .justify { text-align: justify; }
 .bold { font-weight: bold; }
@@ -150,7 +153,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 #column #featured a { color: #179CFF; background-color: #F7F7F7; }
 #column #featured li { display: block; width: 250px; margin: 0; padding: 20px 25px; color: #666666; background-color: #F7F7F7; }
 #column #featured li p.imgholder { display: block; width: 240px; height: 90px; margin: 20px 0 15px 0; }
-#column #featured li h2 { margin: 0; padding: 0 0 8px 0; font-weight: normal; font-family: Georgia, "Times New Roman", Times, serif; line-height: normal; border-bottom: 1px dotted #999999; }
+#column #featured li h2 { margin: 0; padding: 0 0 8px 0; font-weight: normal; font-family: "Poppins", sans-serif; line-height: normal; border-bottom: 1px dotted #999999; }
 #column #featured li.last { border-bottom: 0; margin-bottom: 0; }
 #container #column #featured p.readmore { display: block; width: 100%; margin-top: 15px; height: auto; padding-left: 0; font-weight: bold; text-align: right; line-height: normal; background: none; }
 #container #column .readmore a { display: block; width: 100%; margin-top: 15px; height: auto; padding-left: 0; font-weight: bold; text-align: right; line-height: normal; background: none; }

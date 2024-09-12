@@ -257,7 +257,7 @@ img {
   }
 
 }
-@media (max-width: 1512px) {
+@media (max-width: 768px) {
  img { display: none; }
  .main-content{
   flex:1;
