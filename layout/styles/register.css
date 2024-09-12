@@ -253,11 +253,10 @@ img {
 
   .register-form {
     width: 100%;
-    padding: 20px;
   }
 
 }
-@media (max-width: 1512px) {
+@media (max-width: 1500px) {
  img { display: none; }
  .main-content{
   flex:1;
