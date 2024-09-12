@@ -285,7 +285,7 @@ if ($_SESSION['employer_user_email']) {
                             <option value="health">Health & Wellness</option>
                             <option value="local_services">Local Services</option>
                             <option value="social_impact">Social Impact</option>
-                            <option value="technology">Technology & Innovation</option>    
+                            <option value="technology">Technology & Innovation</option>
                         </select>
                     </div>
                     <div class="form-group">
