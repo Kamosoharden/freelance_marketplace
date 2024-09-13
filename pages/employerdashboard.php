@@ -261,6 +261,10 @@ if ($_SESSION['employer_user_email']) {
                     <label for="skills-required">Skills Required</label>
                     <input type="text" id="skills-required" name="skills-required" required>
                 </div>
+                <div class="form-group">
+                    <label for="job-rules">Rules and regularions</label>
+                    <textarea id="job-rules" name="job-rules" rows="5" required></textarea>
+                </div>
                 <button type="submit" class="btn">Post Job</button>
             </form>
         </div>
