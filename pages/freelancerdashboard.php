@@ -259,11 +259,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h1>Welcome <b><?=$query['username']?></b> to</h1> 
         <h1><span>Freelancer Dashboard</span></h1>
     </div>
-    
 
-    
     <div class="content">
-        <div id="browse-job" class="form-container">
+        <div id="browse-job" class="form-container active">
             <h2>Browse Jobs</h2>
             <div class="dropdown">
                 <div class="form-group">
@@ -273,10 +271,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <option value="part-time">Part-Time</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="skills-required">Skills Required</label>
+                    <input type="text" id="skills-required" name="skills-required" placeholder="Enter skills...">
+                </div>
             </div>
-            <button class="btn">Search Jobs</button>
+            <button class="btn" onclick="fetchJobs()">Search Jobs</button>
+            
+            <div id="job-results"></div>
         </div>
-
         <div id="notifications" class="notification-container">
             <h2>Notifications</h2>
             <?php include("fetch_notifications.php"); ?>
@@ -297,17 +300,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         document.getElementById(formId).classList.add('active');
     }
 
-    function fetchJobs(jobType) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'fetch_jobs.php?job-type=' + jobType, true);
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                document.getElementById('job-results').innerHTML = xhr.responseText;
-            }
-        };
-        xhr.send();
-    }
-
     function toggleNotifications() {
         var notifications = document.getElementById('notifications');
         notifications.classList.toggle('active');
@@ -326,6 +318,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         };
         xhr.send();
     }
+    function fetchJobs() {
+        const jobType = document.getElementById('job-type').value;
+        const skillsRequired = document.getElementById('skills-required').value;
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'fetch_jobs.php?job-type=' + encodeURIComponent(jobType) + '&skills-required=' + encodeURIComponent(skillsRequired), true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                document.getElementById('job-results').innerHTML = xhr.responseText;
+            } else {
+                document.getElementById('job-results').innerHTML = 'Error fetching jobs.';
+            }
+        };
+        xhr.send();
+    }
+
 
     function handleNotification(action, id, type) {
         let reason = '';

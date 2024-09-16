@@ -29,6 +29,7 @@ $stmt->bind_param("sssssss", $jobTitle, $jobType, $paymentRange, $jobDescription
 // Execute the statement
 if ($stmt->execute()) {
     echo "New job posted successfully!";
+    header("Location: employerdashboard.php");
 } else {
     echo "Error: " . $stmt->error;
 }
