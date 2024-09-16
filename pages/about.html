@@ -1,18 +1,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--
-Template Name: Educational Theory
-Author: <a href="http://www.os-templates.com/">OS Templates</a>
-Author URI: http://www.os-templates.com/
-Licence: Free to use under our free template licence terms
-Licence URI: http://www.os-templates.com/template-terms
--->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Freelance Marketplace | About Us</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" href="../layout/styles/layout.css" type="text/css" />
-<!-- 3 Column Stylesheet Added To The Page And Not To The Layout.css -->
 <link rel="stylesheet" href="../layout/styles/3_column.css" type="text/css" />
+<style type="text/css">
+/* Floating Button CSS */
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.floating-button:hover {
+    background-color: #0056b3;
+}
+
+/* Optional Animation for Attention */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.floating-button {
+    animation: bounce 2s infinite;
+}
+</style>
 </head>
 <body id="top">
 <div class="wrapper row1">
@@ -101,7 +133,7 @@ Licence URI: http://www.os-templates.com/template-terms
         <h2 class="title"><strong> Get In Touch</strong></h2>
         <p>Have any questions or need assistance?</p>
          <p>Our support team is here to help. Reach out to us through our contact page, and we'll get back to you promptly.</p>
-        <div class="imgholder"><img src="../images/demo/240x90.gif" alt="" /></div>
+        <div class="imgholder"><img src="../images/demo/12.jpg" alt="" /></div>
       </div>
     </div>
     <!-- ####################################################################################################### --> 
@@ -156,6 +188,7 @@ Licence URI: http://www.os-templates.com/template-terms
     </div>
   </div>
 </div>
+
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="footer" class="clear"> 
@@ -173,6 +206,16 @@ Licence URI: http://www.os-templates.com/template-terms
       Email: <a href="#">honorekamoso@gmail.com</a>
       </address>
     </div>
+    <!-- Floating Button -->
+    <a href="register.html" class="floating-button" 
+    style="position: fixed; bottom: 20px; right: 20px; background-color: #007bff; color: white; padding: 15px 20px; border-radius: 50px; text-align: center; text-decoration: none; font-size: 16px; font-weight: bold; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); z-index: 1000; transition: background-color 0.3s ease;"
+    onmouseover="this.style.backgroundColor='#0056b3';"
+    onmouseout="this.style.backgroundColor='#007bff';"
+    >
+    Login / Signup
+ </a>
+ 
+
     <div class="fl_right">
       <div id="social" class="clear">
         <p>Stay Up to Date With Whats Happening</p>

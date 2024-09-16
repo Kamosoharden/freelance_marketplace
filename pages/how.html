@@ -22,6 +22,46 @@ $(document).ready(function() {
 });
 </script>
 <!-- / Featured Slider -->
+<style type="text/css">
+  /* Floating Button CSS */
+  .floating-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+  }
+  
+  .floating-button:hover {
+      background-color: #0056b3;
+  }
+  
+  /* Optional Animation for Attention */
+  @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+          transform: translateY(0);
+      }
+      40% {
+          transform: translateY(-10px);
+      }
+      60% {
+          transform: translateY(-5px);
+      }
+  }
+  
+  .floating-button {
+      animation: bounce 2s infinite;
+  }
+  </style>
 </head>
 <body id="top">
 <div class="wrapper row1">
@@ -285,6 +325,14 @@ $(document).ready(function() {
       Email: <a href="#">honorekamoso@gmail.com</a>
       </address>
     </div>
+     <!-- Floating Button -->
+     <a href="register.html" class="floating-button" 
+     style="position: fixed; bottom: 20px; right: 20px; background-color: #007bff; color: white; padding: 15px 20px; border-radius: 50px; text-align: center; text-decoration: none; font-size: 16px; font-weight: bold; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); z-index: 1000; transition: background-color 0.3s ease;"
+     onmouseover="this.style.backgroundColor='#0056b3';"
+     onmouseout="this.style.backgroundColor='#007bff';"
+     >
+     Login / Signup
+  </a>
     <div class="fl_right">
       <div id="social" class="clear">
         <p>Stay Up to Date With Whats Happening</p>

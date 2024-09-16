@@ -23,6 +23,46 @@ $(document).ready(function() {
 </script>
 <!-- / Featured Slider -->
 </head>
+<style type="text/css">
+  /* Floating Button CSS */
+  .floating-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+  }
+  
+  .floating-button:hover {
+      background-color: #0056b3;
+  }
+  
+  /* Optional Animation for Attention */
+  @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+          transform: translateY(0);
+      }
+      40% {
+          transform: translateY(-10px);
+      }
+      60% {
+          transform: translateY(-5px);
+      }
+  }
+  
+  .floating-button {
+      animation: bounce 2s infinite;
+  }
+  </style>
 <body id="top">
 <div class="wrapper row1">
   <div id="topnav">
@@ -58,13 +98,13 @@ $(document).ready(function() {
 <div class="wrapper row3">
   <div id="featured_slide_">
     <ul id="featured_slide_Content">
-      <li class="featured_slide_Image"><a href="#"><img src="images/demo/940x340.gif" alt="" /></a>
+      <li class="featured_slide_Image"><a href="#"><img src="images/demo/home.jpg" alt="" /></a>
         <div class="introtext">
           <h2>Unlock Your Potential</h2>
           <p>Welcome to Rwanda's premier freelance marketplace, where talent meets opportunity. Connect with skilled professionals or find your next job, all with the security and ease of our trusted platform. Join us today and unlock a world of possibilities! </p>
         </div>
       </li>
-      <li class="featured_slide_Image"><a href="#"><img src="images/demo/940x340.gif" alt="" /></a>
+      <li class="featured_slide_Image"><a href="#"><img src="images/demo/discover.jpg" alt="" /></a>
         <div class="introtext">
           <h2>Know more about us?</h2>
           <p>This platform offers unparalleled opportunities for both freelancers and employers in Rwanda. Freelancers can showcase their skills, find diverse job postings, and secure work with reliable payment through our escrow system. Employers can easily find and hire talented professionals for their projects, ensuring quality and efficiency. </p>
@@ -147,7 +187,7 @@ $(document).ready(function() {
       </div>
       <div class="fl_right">
         <h2> <strong>Discover Talent, Achieve Success!</strong> </h2>
-        <img src="images/demo/300x120.gif" alt="" />
+        <img src="images/demo/300" alt="" />
         <p>Our platform connects you with top-tier freelancers and exciting projects. Whether you're an employer seeking skilled professionals or a freelancer looking for your next opportunity, we provide a seamless, secure, and efficient experience. Explore our services and unlock your potential today.</p>
         <p class="readmore"><a href="#"> </a></p>
       </div>
@@ -220,6 +260,14 @@ $(document).ready(function() {
       Email: <a href="#">honorekamoso@gmail.com</a>
       </address>
     </div>
+     <!-- Floating Button -->
+     <a href="register.html" class="floating-button" 
+     style="position: fixed; bottom: 20px; right: 20px; background-color: #007bff; color: white; padding: 15px 20px; border-radius: 50px; text-align: center; text-decoration: none; font-size: 16px; font-weight: bold; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); z-index: 1000; transition: background-color 0.3s ease;"
+     onmouseover="this.style.backgroundColor='#0056b3';"
+     onmouseout="this.style.backgroundColor='#007bff';"
+     >
+     Login / Signup
+  </a>
     <div class="fl_right">
       <div id="social" class="clear">
         <p>Stay Up to Date With Whats Happening</p>
