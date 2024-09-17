@@ -10,7 +10,7 @@ body {
   font-size: 16px;
   font-family: "Poppins", sans-serif;
   color: #333;
-  background: linear-gradient(135deg, #4caf50, #a5d6f6); /* Green to Light Blue Gradient */
+  background: linear-gradient(135deg, #3f4d1a, #292b1a); 
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -30,6 +30,7 @@ a:hover {
 /* Image Styling */
 img {
   max-width: 100%;
+  padding: 0rem 5%;
   height: auto;
   display: block;
   border: none;
@@ -47,17 +48,18 @@ img {
 .wrapper .row2 {
   background-color: #4caf50;
   color: #ffffff;
-  width: 100%;
 }
 /* Header Styling */
 #header {
   padding: 0;
-  background-color: #4caf50;
-  border-radius: 10px 10px 0px 0px;
+  background-color: transparent;
   color: #ffffff;
+  position: fixed;
+  width: 100%;
+
 }
 #header {
-  padding: 60px 0 30px 0;
+  padding: 30px 0 30px 0;
 } 
 #header h1,
 #header p,
@@ -120,7 +122,6 @@ img {
   font-weight: bold;
   padding: 10px 20px;
   text-transform: uppercase;
-  border-radius: 5px;
   transition: background 0.3s ease;
 }
 
@@ -139,7 +140,7 @@ img {
   display: flex;
   align-items: center;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 #topnav li a:hover,
 #topnav li.active a {
@@ -148,7 +149,6 @@ img {
 
 /* Main Container for Register Page */
 #container {
-  padding: 80px 15px 60px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -170,9 +170,8 @@ img {
 
 /* Register Form Styling */
 .register-form {
-  margin: 0 auto;
+  margin: 0rem 8rem;
   border: 1px solid #ddd;
-  border-radius: 10px;
   width: 100%;
   max-width: 800px;
   background-color: #fff;
@@ -182,7 +181,9 @@ img {
 .register-form .form-content {
   padding: 40px;
 }
-
+.current{
+  color: green;
+}
 .register-form h2 {
   text-align: center;
   font-size: 2.5rem;
@@ -209,7 +210,6 @@ img {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 5px;
   margin-bottom: 20px;
   box-sizing: border-box;
   font-size: 16px;
@@ -225,7 +225,6 @@ img {
   padding: 12px;
   background-color: #4caf50;
   border: none;
-  border-radius: 5px;
   color: #fff;
   font-weight: bold;
   font-size: 16px;
@@ -263,7 +262,6 @@ img {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-around;
 }
 
 }
