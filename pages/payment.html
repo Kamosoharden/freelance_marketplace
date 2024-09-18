@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escrow Payment - Freelance Marketplace</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        h1, p {
+            text-align: center;
+        }
+        .payment-methods {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .payment-button {
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+        .payment-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Deposit Funds to Escrow</h1>
+    <p>Complete the payment to deposit funds into the escrow account managed by our platform. Once the payment is successful, the freelancer will be able to start the job.</p>
+
+    <div class="payment-methods">
+        <form id="paymentForm" action="process_payment.php" method="POST">
+            <div>
+                <label for="amount">Amount to Deposit (RWF):</label><br>
+                <input type="number" id="amount" name="amount" required style="padding: 10px; width: 50%; margin-top: 10px;">
+            </div><br>
+
+            <div>
+                <label for="payment-method">Select Payment Method:</label><br>
+                <select id="payment-method" name="payment_method" required style="padding: 10px; width: 50%; margin-top: 10px;">
+                    <option value="mobile_money">Mobile Money</option>
+                    <option value="credit_debit_card">Credit/Debit Card</option>
+                </select>
+            </div><br>
+
+            <div>
+                <button type="submit" class="payment-button">Proceed to Payment</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
