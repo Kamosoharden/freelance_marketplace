@@ -60,12 +60,19 @@ body {
 .sub_page .hero_area {
   height: auto;
   background: none;
-  background-color: transparent;
+  background: linear-gradient(to right, #006400 6%, #000080 60%);
+
 }
+
 
 .hero_area.sub_pages {
   height: auto;
 }
+
+.container-fluid {
+  background:transparent
+ }
+
 
 .header_section {
   overflow-x: hidden;
@@ -78,8 +85,17 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 1rem 15%;
+  padding: 1rem 10%;
+  background: linear-gradient(to right, #006400 6%, #000080 60%);
+
 }
+.conatiner-lg-bg-white{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 10%;
+  background-color: white;
+  }
 .header_section .container-fluid {
   padding-right: 25px;
   padding-left: 25px;

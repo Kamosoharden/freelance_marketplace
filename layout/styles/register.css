@@ -19,13 +19,10 @@ body {
 a {
   outline: none;
   text-decoration: none;
-  color: inherit;
+  color: #65652c;
   transition: all 0.3s ease;
 }
 
-a:hover {
-  color: #4caf50;
-}
 
 /* Image Styling */
 img {
@@ -127,13 +124,13 @@ img {
 
 .image-container{
   flex:1;
-  width: 50%;
+  width: 35%;
 }
 .image-container img{
   width: 100%;
   position:fixed;
   bottom:10%;
-  width: 60%;
+  width: 45%;
 }
 .main-content{
   flex:1;
@@ -253,7 +250,14 @@ img {
   .register-form {
     width: 100%;
   }
+  a:hover {
+    color: #4caf50;
+  }
+  a {
+    color: inherit;
+  }
 
+  
 }
 @media (max-width: 1500px) {
  img { display: none; }
@@ -262,6 +266,11 @@ img {
   display: flex;
   align-items: center;
   flex-direction: column;
+
+
 }
 
+}
+a:hover {
+  color: #1f4285;
 }
