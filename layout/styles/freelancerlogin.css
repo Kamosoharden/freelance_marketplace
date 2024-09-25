@@ -9,8 +9,9 @@ html, body {
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     color: #333;
-    background-color: #F9F9F9;
+    background: linear-gradient(135deg, #3f4d1a, #292b1a); 
     line-height: 1.6;
+    height: 100vh;
     overflow-x: hidden;
 }
 
@@ -40,9 +41,18 @@ img {
 
 .wrapper {
     width: 100%;
-    margin: 0 ;
+    margin: 1.5rem auto;
 }
 
+.regnow {
+    display: block;
+}
+.regnow span {
+    font-weight: Lighter;
+}
+.current{
+    color: green;
+}
 /* ----------------------------------------------Responsive Design------------------------------------- */
 
 @media (max-width: 768px) {
@@ -84,7 +94,7 @@ img {
 #header {
     padding: 0;
     text-align: center;
-    background-color: #4F565B;
+    background-color: transparent;
     color: #ffffff;
 }
 
@@ -102,26 +112,7 @@ img {
 
 /* ----------------------------------------------Navbar------------------------------------- */
 
-#topnav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 15px 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
-#topnav ul {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
 
 #topnav li {
     margin: 0 15px;
@@ -176,21 +167,22 @@ img {
 .login-form {
     margin: 0 auto;
     padding: 40px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    border: .1px solid grey;
+    border-radius: 1px;
     width: 100%;
     max-width: 400px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px grey;
+    color: black;
+    margin-top: 50px;
 }
 
 .login-form h2 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
+    text-align: start;
+    font-size: 36px;
     text-transform: uppercase;
     color: #4CAF50;
+    line-height: 0;
 }
 
 .login-form label {
@@ -207,7 +199,6 @@ img {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 5px;
     margin-bottom: 20px;
     box-sizing: border-box;
     font-size: 16px;
@@ -218,7 +209,6 @@ img {
     padding: 12px;
     background-color: #4CAF50;
     border: none;
-    border-radius: 5px;
     color: #fff;
     font-weight: bold;
     font-size: 16px;
