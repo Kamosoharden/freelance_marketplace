@@ -30,10 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['apply_job_id'])) {
     // Check if the freelancer has already applied for the job
     $check_query = "SELECT * FROM applied_jobs WHERE freelancer_id='$freelancer_id' AND job_id='$job_id'";
     $check_result = mysqli_query($conn, $check_query);
+    $employer_query = "SELECT * FROM job_posts WHERE id='$job_id'";
+    $employer = mysqli_fetch_assoc(mysqli_query($conn, $employer_query))['employer_id'];
 
     if (mysqli_num_rows($check_result) == 0) {
         // Insert into applied_jobs table
-        $insert_query = "INSERT INTO applied_jobs (job_id, freelancer_id) VALUES ('$job_id', '$freelancer_id')";
+        $insert_query = "INSERT INTO applied_jobs (job_id, freelancer_id, employer_id) VALUES ('$job_id', '$freelancer_id', '$employer')";
         if (mysqli_query($conn, $insert_query)) {
             echo "<p>You have successfully applied for the job.</p>";
         } else {
@@ -438,6 +440,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['job-type']) && isset($_G
 </head>
 <body>
 
+<div class="wrapper row2">
+    <div id="header" class="clear">
+        <div class="fl_left">
+            <h1><a href="./../index.html">Freelance Marketplace</a></h1>
+            <p>Connecting Talent with Opportunity</p>
+        </div>
+        <div class="fl_right">
+            <p><a href="logout.php"><strong>LOGOUT</strong></a></p>
+        </div>
+    </div>
+</div><br><br><br>
 <div class="container">
     <div class="header">
         <h1>Welcome <b><?=$query['username']?></b> to</h1> 

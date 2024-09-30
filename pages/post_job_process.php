@@ -1,9 +1,16 @@
 <?php
-// Database connection parameters
+session_start(); 
+
 $servername = "localhost";
-$username = "root"; // Change this to your DB username
-$password = "";     // Change this to your DB password
+$username = "root"; 
+$password = "";    
 $dbname = "freelance";
+
+if (!isset($_SESSION['user_id'])) {
+    die("Error: User is not logged in.");
+}
+
+$id = $_SESSION['user_id']; 
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -20,16 +27,16 @@ $paymentRange = htmlspecialchars($_POST['payment-range']);
 $jobDescription = htmlspecialchars($_POST['job-description']);
 $projectDuration = htmlspecialchars($_POST['project-duration']);
 $skillsRequired = htmlspecialchars($_POST['skills-required']);
-$jobRules = htmlspecialchars($_POST['job-rules']); // New field
+$jobRules = htmlspecialchars($_POST['job-rules']);
 
-// Prepare and bind the SQL statement
-$stmt = $conn->prepare("INSERT INTO job_posts (job_title, job_type, payment_range, job_description, project_duration, skills_required, job_rules) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("sssssss", $jobTitle, $jobType, $paymentRange, $jobDescription, $projectDuration, $skillsRequired, $jobRules);
+$stmt = $conn->prepare("INSERT INTO job_posts (job_title, job_type, payment_range, job_description, project_duration, skills_required, employer_id, job_rules) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-// Execute the statement
+$stmt->bind_param("ssssssss", $jobTitle, $jobType, $paymentRange, $jobDescription, $projectDuration, $skillsRequired, $id, $jobRules);
+
 if ($stmt->execute()) {
     echo "New job posted successfully!";
     header("Location: employerdashboard.php");
+    exit(); 
 } else {
     echo "Error: " . $stmt->error;
 }

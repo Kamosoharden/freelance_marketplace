@@ -11,10 +11,19 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($_SESSION['employer_user_email']) {
     $email = $_SESSION['employer_user_email'];
     $query = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM employers WHERE email='$email'"));
+    $employer_id = $_SESSION['user_id']; // Assuming you store user_id in the session
 } else {
     header("Location: employerlogin.html");
     exit();
 }
+
+$notifications_query = "SELECT aj.*, f.name AS freelancer_name, j.job_title AS job_title 
+                        FROM applied_jobs aj 
+                        JOIN freelancers f ON aj.freelancer_id = f.id 
+                        JOIN job_posts j ON aj.job_id = j.id 
+                        WHERE aj.employer_id = $employer_id 
+                        ORDER BY aj.id DESC";
+$notifications_result = mysqli_query($conn, $notifications_query);
 ?>
 
 <!DOCTYPE html>
@@ -203,6 +212,59 @@ if ($_SESSION['employer_user_email']) {
             text-decoration: none;
             cursor: pointer;
         }
+        #notifications {
+            display: none;
+        }
+
+        .notification-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .notification-item:hover {
+            background-color: #e9ecef;
+        }
+
+        .notification-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .notification-meta {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .notification-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .notification-content {
+            flex-grow: 1;
+        }
+
+        .start-btn {
+            padding: 5px 15px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .start-btn:hover {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -228,6 +290,7 @@ if ($_SESSION['employer_user_email']) {
     <div class="nav">
         <a href="#" onclick="showForm('post-job')">Post Job</a>
         <a href="#" onclick="showForm('browse-freelancers')">Browse Freelancers</a>
+        <a href="#" onclick="showForm('notifications')">Notifications</a>
     </div>
     
     <div class="content">
@@ -329,8 +392,31 @@ if ($_SESSION['employer_user_email']) {
             </form>
             <div id="results"></div>
         </div>
+        <div id="notifications" class="form-container">
+            <h2>Notifications</h2>
+            <ul class="notification-list">
+                <?php if (mysqli_num_rows($notifications_result) > 0): ?>
+                    <?php while($notification = mysqli_fetch_assoc($notifications_result)): ?>
+                        <li class="notification-item">
+                            <div class="notification-content">
+                                <div class="notification-title">
+                                    <?php echo htmlspecialchars($notification['freelancer_name']); ?> applied for "<?php echo htmlspecialchars($notification['job_title']); ?>"
+                                </div>
+                                <div class="notification-meta">
+                                    Applied on: <?php echo date('F j, Y', strtotime($notification['apply_date'])); ?>
+                                </div>
+                            </div>
+                            <a href="payment.php"><button class="start-btn" onclick="startAction(<?php echo $notification['id']; ?>)">Start job</button></a>
+                        </li>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <li class="notification-item">No new notifications</li>
+                <?php endif; ?>
+            </ul>
+        </div>
     </div>
 </div>
+
 
 <div id="hire-modal" class="modal">
     <div class="modal-content">
@@ -408,11 +494,14 @@ if ($_SESSION['employer_user_email']) {
         };
     }
 
+
     function showForm(formId) {
         document.querySelectorAll('.form-container').forEach(container => {
             container.classList.remove('active');
+            container.style.display = 'none';
         });
         document.getElementById(formId).classList.add('active');
+        document.getElementById(formId).style.display = 'flex';
     }
 
     function searchFreelancers(event) {

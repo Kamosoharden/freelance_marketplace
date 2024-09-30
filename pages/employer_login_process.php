@@ -24,13 +24,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $hashed_password);
+        $stmt->bind_result($id, $stored_password);
         $stmt->fetch();
 
-        if ($password == $hashed_password) {
+        // Since you are not hashing the password, direct comparison is used
+        if ($password == $stored_password) {
             $_SESSION['user_id'] = $id;
             $_SESSION['employer_user_email'] = $email;
-            header("Location: employerdashboard.php"); 
+
+            // Output alert before the redirect
+            echo "<script>alert('Login successful. User ID: ".$_SESSION['user_id']."');</script>";
+
+            // Ensure alert is processed before redirecting
+            echo "<script>window.location.href='employerdashboard.php';</script>";
+            exit();
+
         } else {
             echo "<script>alert('Incorrect password');</script>";
             echo "<script>window.history.back();</script>";
