@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Stripe Example</title>
+    <title>Payment</title>
     <meta charset="UTF-8">
 </head>
 <body>
@@ -9,7 +9,13 @@
 
     <form method="post" action="checkout.php">
         <p>DEPOSIT</p>
-        <p><strong>RWF 100.000</strong></p>
+        <input type="text" name="product_name" placeholder="Product Name" required>
+        <input type="text" name="amount" placeholder="Amount" required>
+        <input type="text" name="currency" placeholder="Currency" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <input type="text" name="payment_method" placeholder="Payment Method" required>
+        <input type="text" name="customer" placeholder="Customer" required>
+
         <button>Pay</button>
     </form>
 

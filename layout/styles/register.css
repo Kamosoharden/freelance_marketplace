@@ -19,7 +19,7 @@ body {
 a {
   outline: none;
   text-decoration: none;
-  color: #65652c;
+  color: #3642ee;
   transition: all 0.3s ease;
 }
 
@@ -251,7 +251,7 @@ img {
     width: 100%;
   }
   a:hover {
-    color: #4caf50;
+    color: blue;
   }
   a {
     color: inherit;
