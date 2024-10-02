@@ -276,7 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['job-type']) && isset($_G
 
         .notification-actions {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             gap: 10px;
             margin-top: 10px;
         }
@@ -436,6 +436,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['job-type']) && isset($_G
             background-color: #cccccc;
             cursor: not-allowed;
         }
+        .form-container, .notification-container {
+            display: none;
+        }
+        .nav button.active {
+            background-color: #007bff;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -459,7 +466,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['job-type']) && isset($_G
 
     <div class="content">
         <!-- Job Search Section -->
-        <div id="browse-job" class="form-container active">
+        <div id="browse-job" class="form-container">
             <h2>Browse Jobs</h2>
             <div class="dropdown">
                 <div class="form-group">
@@ -486,7 +493,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['job-type']) && isset($_G
             <h2>Notifications</h2>
             <?php
             // Fetch job notifications
-            $notifications = mysqli_query($conn, "SELECT * FROM job_offers WHERE freelancer_email='$email'");
+            $notifications = mysqli_query($conn, "SELECT * FROM job_offers WHERE freelancer_email='$email' AND status = 'Pending'");
             if (mysqli_num_rows($notifications) > 0) {
                 while ($notification = mysqli_fetch_assoc($notifications)) {
                     echo "<div class='notification-item'>";
@@ -494,7 +501,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['job-type']) && isset($_G
                     echo "<p><strong>Description:</strong> " . htmlspecialchars($notification['job_description']) . "</p>";
                     echo "<div class='notification-actions'>";
                     echo "<form method='post'><input type='hidden' name='job_id' value='" . $notification['job_id'] . "'>";
-                    echo "<button type='submit' name='action' value='accept' class='accept'>Accept</button>";
+                    echo "<button type='submit' name='action' value='accept' class='accept'>Accept</button> &nbsp";
                     echo "<button type='submit' name='action' value='reject' class='reject'>Reject</button>";
                     echo "</form>";
                     echo "</div></div>";
@@ -508,8 +515,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['job-type']) && isset($_G
 </div>
 
 <div class="nav">
-    <a href="#" onclick="showForm('browse-job')">Browse Job</a>
-    <a href="#" onclick="showForm('notifications')">Notifications</a>
+    <button onclick="showSection('browse-job')">Browse Job</button>
+    <button onclick="showSection('notifications')">Notifications</button>
 </div>
 
 <div id="jobRulesModal" class="modal">
@@ -579,6 +586,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['job-type']) && isset($_G
         document.body.appendChild(form);
         form.submit();
     }
+    function showSection(sectionId) {
+        // Hide all sections
+        document.getElementById('browse-job').style.display = 'none';
+        document.getElementById('notifications').style.display = 'none';
+
+        document.getElementById(sectionId).style.display = 'block';
+
+        // Update active state for buttons
+        document.querySelectorAll('.nav button').forEach(button => {
+            button.classList.remove('active');
+        });
+        event.target.classList.add('active');
+    }
+
+    // Show Browse Job section by default
+    document.addEventListener('DOMContentLoaded', function() {
+        showSection('browse-job');
+    });
 </script>
 
 </body>
