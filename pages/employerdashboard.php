@@ -16,6 +16,7 @@ if ($_SESSION['employer_user_email']) {
     header("Location: employerlogin.html");
     exit();
 }
+$employer_id = $_SESSION['user_id'];
 
 $notifications_query = "SELECT aj.*, f.name AS freelancer_name, j.job_title AS job_title 
                         FROM applied_jobs aj 
@@ -24,6 +25,17 @@ $notifications_query = "SELECT aj.*, f.name AS freelancer_name, j.job_title AS j
                         WHERE aj.id = $employer_id 
                         ORDER BY aj.id DESC";
 $notifications_result = mysqli_query($conn, $notifications_query);
+
+// Fetch accepted hires with freelancer names
+$accepted_hires_query = "
+    SELECT hires.id, hires.money, hires.job_category, hires.period_time, hires.hired_at, freelancers.name AS freelancer_name 
+    FROM hires 
+    JOIN freelancers ON hires.freelancer_id = freelancers.id
+    WHERE hires.status = 'accepted' AND hires.employer_id = '$employer_id'
+";
+
+$accepted_hires_result = mysqli_query($conn, $accepted_hires_query);
+
 ?>
 
 <!DOCTYPE html>
@@ -179,7 +191,7 @@ $notifications_result = mysqli_query($conn, $notifications_query);
                 </select>
             </div>
             <div class="form-group">
-                <label for="payment-range">Payment Range</label>
+                <label for="payment-range">Payment</label>
                 <input type="text" id="payment-range" name="payment-range" required>
             </div>
             <div class="form-group">
@@ -266,23 +278,47 @@ $notifications_result = mysqli_query($conn, $notifications_query);
     <div class="content-section" id="notifications" style="display: none;">
         <h2>Notifications</h2>
         <ul class="notification-list">
-            <?php if (mysqli_num_rows($notifications_result) > 0): ?>
-                <?php while($notification = mysqli_fetch_assoc($notifications_result)): ?>
-                    <li class="notification-item">
-                        <div class="notification-content">
-                            <div class="notification-title">
-                                <?php echo htmlspecialchars($notification['freelancer_name']); ?> applied for "<?php echo htmlspecialchars($notification['job_title']); ?>"
-                            </div>
-                            <div class="notification-meta">
-                                Applied on: <?php echo date('F j, Y', strtotime($notification['apply_date'])); ?>
-                            </div>
+            <?php if (mysqli_num_rows($accepted_hires_result) > 0): ?>
+            <li class="notification-header">Accepted Hires</li>
+            <?php while ($hire = mysqli_fetch_assoc($accepted_hires_result)): ?>
+                <li class="notification-item">
+                    <div class="notification-content">
+                        <div class="notification-title">
+                            Hire Offer from <?php echo htmlspecialchars($hire['freelancer_name']); ?>
                         </div>
-                        <a href="payment/index.php"><button class="btn btn-primary" onclick="startAction(<?php echo $notification['id']; ?>)">Start job</button></a>
-                    </li>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <li class="notification-item">No new notifications</li>
-            <?php endif; ?>
+                        <div class="notification-meta">
+                            <p><strong>Payment:</strong> $<?php echo htmlspecialchars($hire['money']); ?></p>
+                            <p><strong>Category:</strong> <?php echo htmlspecialchars($hire['job_category']); ?></p>
+                            <p><strong>Period:</strong> <?php echo htmlspecialchars($hire['period_time']); ?></p>
+                            <p><strong>Offered at:</strong> <?php echo date('F j, Y', strtotime($hire['hired_at'])); ?></p>
+                        </div>
+                    </div>
+                    <a href="payment/index.php"><button class="start-btn" onclick="startAction(<?php echo $hire['id']; ?>)">Start Job</button></a>
+                </li>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <li class="notification-item">No accepted hires</li>
+        <?php endif; ?>
+
+        <!-- Display Notifications -->
+        <?php if (mysqli_num_rows($notifications_result) > 0): ?>
+            <li class="notification-header">New Applications</li>
+            <?php while($notification = mysqli_fetch_assoc($notifications_result)): ?>
+                <li class="notification-item">
+                    <div class="notification-content">
+                        <div class="notification-title">
+                            <?php echo htmlspecialchars($notification['freelancer_name']); ?> applied for "<?php echo htmlspecialchars($notification['job_title']); ?>"
+                        </div>
+                        <div class="notification-meta">
+                            Applied on: <?php echo date('F j, Y', strtotime($notification['apply_date'])); ?>
+                        </div>
+                    </div>
+                    <a href="payment/index.php"><button class="start-btn" onclick="startAction(<?php echo $notification['id']; ?>)">Start Job</button></a>
+                </li>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <li class="notification-item">No new notifications</li>
+        <?php endif; ?>
         </ul>
     </div>
 </div>
