@@ -1,5 +1,4 @@
 <?php
-header('Content-Type: application/json');
 session_start();
 $servername = "localhost";
 $username = "root";
@@ -11,12 +10,12 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
+    die("Connection failed: " . $conn->connect_error);
 }
 
 // Check if employer is logged in
 if (!isset($_SESSION['employer_user_email'])) {
-    echo json_encode(["error" => "You must be logged in as an employer to hire a freelancer."]);
+    echo "You must be logged in as an employer to hire a freelancer.";
     exit();
 }
 
@@ -38,12 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             VALUES ('$employer_id', '$freelancer_id', 'pending','$money', '$job_category', '$period_time')";
 
     if (mysqli_query($conn, $sql)) {
-        echo json_encode(["success" => "Freelancer successfully hired!"]);
+        echo "Freelancer successfully hired!";
     } else {
-        echo json_encode(["error" => "Error: " . mysqli_error($conn)]);
+        echo "Error: " . mysqli_error($conn);
     }
 } else {
-    echo json_encode(["error" => "Invalid request method."]);
+    echo "Invalid request method.";
 }
 
 // Close the database connection

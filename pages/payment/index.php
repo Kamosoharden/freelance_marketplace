@@ -1,128 +1,101 @@
-<?php
-session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "freelance";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Check if the user is logged in
-if (!isset($_SESSION['employer_user_email'])) {
-    header("Location: ../employerlogin.html");
-    exit();
-}
-
-$email = $_SESSION['employer_user_email'];
-
-$query = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM employers WHERE email='$email'"));
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freelance Marketplace - Escrow Payment</title>
-    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css" />
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
-    <link href="../../css/style.css" rel="stylesheet" />
-    <link href="../../css/responsive.css" rel="stylesheet" />
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #1c1c1c;
-            color: #ffffff;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
-        .navbar {
-            background-color: #2c2c2c;
-            padding: 10px 0;
-        }
-        .navbar-brand {
-            color: #ffffff !important;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        .nav-link {
-            color: #ffffff !important;
-        }
-        .nav-link:hover {
-            color: #32cc32 !important;
-        }
+
         .container {
-            margin-top: 50px;
-        }
-        .payment-header {
-            background-color: #2c2c2c;
-            border-radius: 10px;
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
             padding: 20px;
-            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
-        .payment-header h1 {
-            color: #ffffff;
+
+        h1, p {
+            text-align: center;
+            
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        label {
+            margin: 10px 0 5px;
             font-weight: bold;
+            align-self: flex-start;
         }
-        .payment-header p {
-            color: #cccccc;
+
+        input {
+            width: 95%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
         }
-        .content-section {
-            background-color: #2c2c2c;
-            border-radius: 10px;
-            padding: 20px;
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .form-group label {
-            color: #ffffff;
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
         }
-        .form-control {
-            background-color: #3c3c3c;
-            border: 1px solid #4c4c4c;
-            color: #ffffff;
-        }
-        .btn-primary {
-            background-color: #32cc32;
-            border-color: #32cc32;
-        }
-        .btn-primary:hover {
-            background-color: #28a745;
-            border-color: #28a745;
+
+        .button-container {
+            text-align: center;
+            align-self: center;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="payment-header">
-        <h1>Ready to Start?</h1>
-        <p>To start the job, you must first deposit funds into the escrow account. This ensures the freelancer will be paid upon successful completion of the project.</p>
-    </div>
+    <h1>Ready to Start?</h1>
+    <p>To start the job, the employer must first deposit funds into the escrow account. This ensures the freelancer will be paid upon successful completion of the project.</p>
     
-    <div class="content-section">
-        <form action="./payment/pay.php" method="POST">
-            <div class="form-group">
-                <input type="hidden" class="form-control" id="email" name="email" value="<?php echo $query['email']; ?>" readonly>
-            </div>
-            <div class="form-group">
-                <input type="hidden" class="form-control" id="name" name="name" value="<?php echo $query['name']; ?>" readonly>
-            </div>
-            <div class="form-group">
-                <label for="amount">Amount (RWF)</label>
-                <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter the amount" required>
-            </div>
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary" name="pay">Send Payment</button>
-            </div>
-        </form>
-    </div>
+    <form action="pay.php" method="POST">
+        <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter the name" required>
+        </div>
+        <div>
+        <label for="amount">Amount (RWF)</label>
+        <input type="number" id="amount" name="amount" placeholder="Enter the amount" required>
+        </div>
+
+        <div class="button-container">
+            <input type="submit" name="pay" value="Send Payment">
+        </div>
+    </form>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
