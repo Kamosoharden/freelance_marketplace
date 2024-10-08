@@ -406,7 +406,7 @@ $notifications_result = mysqli_query($conn, $notifications_query);
                                     Applied on: <?php echo date('F j, Y', strtotime($notification['apply_date'])); ?>
                                 </div>
                             </div>
-                            <a href="payment.php"><button class="start-btn" onclick="startAction(<?php echo $notification['id']; ?>)">Start job</button></a>
+                            <a href="payment/index.php"><button class="start-btn" onclick="startAction(<?php echo $notification['id']; ?>)">Start job</button></a>
                         </li>
                     <?php endwhile; ?>
                 <?php else: ?>
