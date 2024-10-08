@@ -31,306 +31,226 @@ $notifications_result = mysqli_query($conn, $notifications_query);
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Employer Dashboard</title>
-    <link rel="stylesheet" href="./../layout/styles/freelancerlogin.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet" />
+    <link href="../css/responsive.css" rel="stylesheet" />
     <style>
         body {
-            font-family: cursive;
-            margin: 0;
-            padding: 0;
-            
+            font-family: 'Poppins', sans-serif;
+            background-color: #1c1c1c;
+            color: #ffffff;
         }
-
-        .container {
-            width: 60%;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #6a747b;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            margin-bottom: 70px;
-            border-radius: 100px;
-            margin-top: 3;
-        }
-
-        .header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .navbar {
+            background-color: #2c2c2c;
             padding: 10px 0;
         }
-
-        .header h1 {
-            margin: 0;
-            font-size: 35px;
-            display: inline-block;
-            color: #000000;
-            font-weight: bold;
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
         }
-
-        .header h1 span {
-            color: #32cc32;
-            
+        .nav-link:hover {
+            color: #32cc32 !important;
         }
-
-        .header a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            
-        }
-
-        .nav a {
-            text-decoration: none;
-            color: #000000;
-            padding: 10px 20px;
-            background-color: #e9ecef;  
-            border-radius: 15px;
-            margin-right: 20px;
-            margin-left: 10px;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        .nav a:hover {
-            background-color: #d0d4d8;
-        }
-
-        .content {
+        .container {
             margin-top: 20px;
         }
-
-        .form-container {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            color: #000000;
-            font-size: medium;
-            font-weight: bold;
-            text-transform: uppercase;
-            
-        }
-
-        .form-container.active {
-            display: flex;
-            
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            text-align: left;
-            font-size: medium;
-            color: #000000;
-        }
-
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
+        .dashboard-header {
+            background-color: #2c2c2c;
             border-radius: 10px;
-            font-size: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
-
-        .form-group textarea {
-            resize: vertical;
-        }
-
-        .btn {
-            padding: 10px 25px;
-            background-color: #28a745;
+        .dashboard-header h1 {
             color: #ffffff;
             font-weight: bold;
-            border: none;
+        }
+        .dashboard-header h1 span {
+            color: #32cc32;
+        }
+        .content-section {
+            background-color: #2c2c2c;
             border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-        }
-
-        .btn:hover {
-            background-color: #218838;
-        }
-
-        .dropdown {
-            display: flex;
-            flex-direction: column; 
-            gap: 15px;
-            align-items: center;
-        }
-
-        .dropdown .form-group {
-            width: 100%;
-            max-width: 300px;
-        }
-        
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
             padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 10px;
         }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+        .form-group label {
+            color: #ffffff;
         }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+        .form-control {
+            background-color: #3c3c3c;
+            border: 1px solid #4c4c4c;
+            color: #ffffff;
         }
-        #notifications {
-            display: none;
+        .btn-primary {
+            background-color: #32cc32;
+            border-color: #32cc32;
         }
-
-        .notification-list {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .notification-item:hover {
-            background-color: #e9ecef;
-        }
-
-        .notification-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .notification-meta {
-            color: #6c757d;
-            font-size: 0.9em;
+        .btn-primary:hover {
+            background-color: #28a745;
+            border-color: #28a745;
         }
         .notification-item {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            margin-bottom: 10px;
+            background-color: #3c3c3c;
+            border: 1px solid #4c4c4c;
+            border-radius: 10px;
             padding: 15px;
-            transition: background-color 0.3s;
+            margin-bottom: 10px;
         }
-
-        .notification-content {
-            flex-grow: 1;
-        }
-
         .start-btn {
-            padding: 5px 15px;
-            background-color: #007bff;
+            background-color: #32cc32;
             color: #ffffff;
             border: none;
+            padding: 5px 15px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
         .start-btn:hover {
-            background-color: #0056b3;
+            background-color: #28a745;
+        }
+        .modal-content {
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border-radius: 15px;
+        }
+        .hire-button {
+            background-color: #32cc32;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
         }
 
+        .hire-button:hover {
+            background-color: #28a745;
+            transform: translateY(-2px);
+        }
+
+        .hire-button:active {
+            transform: translateY(0);
+        }
+
+        .hire-button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        /* Style for the modal */
+        .modal-content {
+            background-color: #2c2c2c;
+            color: #ffffff;
+        }
+
+        .modal-header, .modal-footer {
+            border-color: #4c4c4c;
+        }
+
+        .modal-header .close {
+            color: #ffffff;
+        }
+
+        .modal-body .form-control {
+            background-color: #3c3c3c;
+            border: 1px solid #4c4c4c;
+            color: #ffffff;
+        }
+
+        .modal-footer .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .modal-footer .btn-primary {
+            background-color: #32cc32;
+            border-color: #32cc32;
+        }
+
+        .modal-footer .btn-primary:hover {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
     </style>
 </head>
 <body>
 
-<div class="wrapper row2">
-    <div id="header" class="clear">
-        <div class="fl_left">
-            <h1><a href="./../index.html">Freelance Marketplace</a></h1>
-            <p>Connecting Talent with Opportunity</p>
-        </div>
-        <div class="fl_right">
-            <p><a href="logout.php"> <strong>LOGOUT</strong></a></p>
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="./../index.html">Freelance Marketplace</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showSection('post-job')">Post Job</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showSection('browse-freelancers')">Browse Freelancers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showSection('notifications')">Notifications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Logout</a>
+                </li>
+            </ul>
         </div>
     </div>
-</div><br><br><br>
+</nav>
 
 <div class="container">
-    <div class="header">
+    <div class="dashboard-header">
         <h1>Welcome <b><?=$query['company']?></b> to</h1> 
         <h1><span>Employer Dashboard</span></h1>
     </div>
-    
-    <div class="nav">
-        <a href="#" onclick="showForm('post-job')">Post Job</a>
-        <a href="#" onclick="showForm('browse-freelancers')">Browse Freelancers</a>
-        <a href="#" onclick="showForm('notifications')">Notifications</a>
-    </div>
-    
-    <div class="content">
-        <div id="post-job" class="form-container">
-            <h2>Post a Job</h2>
-            <form action="post_job_process.php" method="POST">
-                <div class="form-group">
+
+    <div class="content-section" id="post-job">
+        <h2>Post a Job</h2>
+        <form action="post_job_process.php" method="POST">
+            <div class="row">
+                <div class="col-md-6 form-group">
                     <label for="job-title">Job Title</label>
-                    <input type="text" id="job-title" name="job-title" required>
+                    <input type="text" id="job-title" name="job-title" class="form-control" required>
                 </div>
-                <div class="form-group">
+                <div class="col-md-6 form-group">
                     <label for="job-type">Job Type</label>
-                    <select id="job-type" name="job-type" required>
+                    <select id="job-type" name="job-type" class="form-control" required>
                         <option value="full-time">Full-Time</option>
                         <option value="part-time">Part-Time</option>
                     </select>
                 </div>
-                <div class="form-group">
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
                     <label for="payment-range">Payment Range</label>
-                    <input type="text" id="payment-range" name="payment-range" required>
+                    <input type="text" id="payment-range" name="payment-range" class="form-control" required>
                 </div>
-                <div class="form-group">
-                    <label for="job-description">Job Description</label>
-                    <textarea id="job-description" name="job-description" rows="5" required></textarea>
-                </div>
-                <div class="form-group">
+                <div class="col-md-6 form-group">
                     <label for="project-duration">Project Duration</label>
-                    <input type="text" id="project-duration" name="project-duration" required>
+                    <input type="text" id="project-duration" name="project-duration" class="form-control" required>
                 </div>
-                <div class="form-group">
-                    <label for="skills-required">Skills Required</label>
-                    <input type="text" id="skills-required" name="skills-required" required>
-                </div>
-                <div class="form-group">
-                    <label for="job-rules">Rules and regularions</label>
-                    <textarea id="job-rules" name="job-rules" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn">Post Job</button>
-            </form>
-        </div>
+            </div>
+            <div class="form-group">
+                <label for="job-description">Job Description</label>
+                <textarea id="job-description" name="job-description" rows="5" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="skills-required">Skills Required</label>
+                <input type="text" id="skills-required" name="skills-required" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="job-rules">Rules and Regulations</label>
+                <textarea id="job-rules" name="job-rules" rows="5" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Post Job</button>
+        </form>
+    </div>
 
         <div id="browse-freelancers" class="form-container">
             <h2>Browse Freelancers</h2>
@@ -451,63 +371,48 @@ $notifications_result = mysqli_query($conn, $notifications_query);
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
-    // JavaScript to handle modal and form submission
     function hireFreelancer(freelancerId) {
-        // Show the modal
-        var modal = document.getElementById("hire-modal");
-        var span = document.getElementsByClassName("close")[0];
-
-        // Open the modal
-        modal.style.display = "block";
-
-        // Close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // Handle form submission
-        document.getElementById("hire-form").onsubmit = function(event) {
-            event.preventDefault();
-            
-            var formData = new FormData(this);
-            formData.append("freelancer_id", freelancerId);
-
-            fetch('hire_freelancer.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-                modal.style.display = "none";
-                location.reload();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        };
+        console.log('Hiring freelancer with ID:', freelancerId);
+        document.getElementById('freelancer_id').value = freelancerId;
+        $('#hireModal').modal('show');
     }
 
-
-    function showForm(formId) {
-        document.querySelectorAll('.form-container').forEach(container => {
-            container.classList.remove('active');
-            container.style.display = 'none';
+    function submitHireForm() {
+        var formData = new FormData(document.getElementById('hireForm'));
+        
+        fetch('hire_freelancer.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.success);
+                $('#hireModal').modal('hide');
+                searchFreelancers(new Event('submit')); // Refresh the search results
+            } else if (data.error) {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
-        document.getElementById(formId).classList.add('active');
-        document.getElementById(formId).style.display = 'flex';
+    }
+
+    function showSection(sectionId) {
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.display = 'none';
+        });
+        document.getElementById(sectionId).style.display = 'block';
     }
 
     function searchFreelancers(event) {
         event.preventDefault();
-        // Add logic to handle searching freelancers and display results
-        // Example:
         var formData = new FormData(event.target);
         fetch('search_freelancers.php', {
             method: 'POST',
@@ -520,6 +425,39 @@ $notifications_result = mysqli_query($conn, $notifications_query);
         .catch(error => {
             console.error('Error:', error);
         });
+    }
+
+    function showPaymentConfirmation(jobId) {
+        fetch('payment/index.php?job_id=' + jobId)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('payment-confirmation-' + jobId).innerHTML = data;
+                document.getElementById('payment-confirmation-' + jobId).style.display = 'block';
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function proceedPayment(jobId) {
+        // AJAX call to process the payment
+        fetch('./payment/index.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'job_id=' + jobId
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data); // Show success or error message
+            location.reload(); // Reload the page to update the status
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function cancelPayment(jobId) {
+        document.getElementById('payment-confirmation-' + jobId).style.display = 'none';
     }
 </script>
 </body>
