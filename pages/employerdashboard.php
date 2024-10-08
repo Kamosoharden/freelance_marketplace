@@ -22,7 +22,7 @@ $notifications_query = "SELECT aj.*, f.name AS freelancer_name, j.job_title AS j
                         FROM applied_jobs aj 
                         JOIN freelancers f ON aj.freelancer_id = f.id 
                         JOIN job_posts j ON aj.job_id = j.id 
-                        WHERE aj.id = $employer_id 
+                        WHERE aj.employer_id = $employer_id 
                         ORDER BY aj.id DESC";
 $notifications_result = mysqli_query($conn, $notifications_query);
 
