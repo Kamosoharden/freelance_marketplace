@@ -109,10 +109,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['job-type']) && isset($_G
             font-family: 'Poppins', sans-serif;
             background-color: #1c1c1c;
             color: #ffffff;
+            padding-top: 56px; /* Add this line to create space for the fixed navbar */
         }
         .navbar {
             background-color: #2c2c2c;
             padding: 10px 0;
+            position: fixed; /* Add this line */
+            top: 0; /* Add this line */
+            left: 0; /* Add this line */
+            right: 0; /* Add this line */
+            z-index: 1030; /* Add this line to ensure navbar stays on top */
         }
         .navbar-brand, .nav-link {
             color: #ffffff !important;
@@ -128,6 +134,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['job-type']) && isset($_G
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
+            margin-top: 50px;
+
         }
         .dashboard-header h1 {
             color: #ffffff;
