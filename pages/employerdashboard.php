@@ -17,12 +17,26 @@ if ($_SESSION['employer_user_email']) {
     exit();
 }
 
-$notifications_query = "SELECT aj.*, f.name AS freelancer_name, j.job_title AS job_title 
-                        FROM applied_jobs aj 
-                        JOIN freelancers f ON aj.freelancer_id = f.id 
-                        JOIN job_posts j ON aj.job_id = j.id 
-                        WHERE aj.id = $employer_id 
-                        ORDER BY aj.id DESC";
+// Add this near the top of the file, after session_start()
+if (isset($_GET['payment'])) {
+    $paymentStatus = $_GET['payment'];
+    if ($paymentStatus == 'success') {
+        echo "<script>alert('Payment successful! The freelancer has been notified.');</script>";
+    } elseif ($paymentStatus == 'cancelled') {
+        echo "<script>alert('Payment was cancelled.');</script>";
+    } elseif ($paymentStatus == 'fraud') {
+        echo "<script>alert('Potential fraudulent transaction detected.');</script>";
+    } elseif ($paymentStatus == 'failed') {
+        echo "<script>alert('Payment failed. Please try again.');</script>";
+    }
+}
+
+// Update the notifications query to exclude paid hires
+$notifications_query = "SELECT h.id as hire_id, h.freelancer_id, h.status, h.money, h.job_category, h.period_time, f.name as freelancer_name, j.job_title 
+                        FROM hires h 
+                        JOIN freelancers f ON h.freelancer_id = f.id 
+                        LEFT JOIN job_posts j ON h.job_category = j.job_type 
+                        WHERE h.employer_id = $employer_id AND h.status != 'paid'";
 $notifications_result = mysqli_query($conn, $notifications_query);
 ?>
 
@@ -42,8 +56,14 @@ $notifications_result = mysqli_query($conn, $notifications_query);
             font-family: 'Poppins', sans-serif;
             background-color: #1c1c1c;
             color: #ffffff;
+            padding-top: 56px; /* Adjust this value based on your navbar height */
         }
         .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
             background-color: #2c2c2c;
             padding: 10px 0;
         }
@@ -61,6 +81,7 @@ $notifications_result = mysqli_query($conn, $notifications_query);
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
+            margin-top: 50px;
         }
         .dashboard-header h1 {
             color: #ffffff;
@@ -129,6 +150,44 @@ $notifications_result = mysqli_query($conn, $notifications_query);
         #results {
             margin-top: 20px;
         }
+
+        .freelancer-item {
+            background-color: #2c2c2c;
+            border: 1px solid #3c3c3c;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .freelancer-item p {
+            margin: 5px 0;
+        }
+
+        .hire-btn, .hired-btn {
+            background-color: #32cc32;
+            color: #ffffff;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .hire-btn:hover {
+            background-color: #28a745;
+        }
+
+        .hired-btn {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .no-results {
+            color: #ffffff;
+            text-align: center;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -160,8 +219,7 @@ $notifications_result = mysqli_query($conn, $notifications_query);
 
 <div class="container">
     <div class="dashboard-header">
-        <h1>Welcome <b><?=$query['company']?></b> to</h1> 
-        <h1><span>Employer Dashboard</span></h1>
+        <h1>Welcome <span><b><?=$query['company']?></b></span></h1> 
     </div>
     
     <div class="content-section" id="post-job">
@@ -274,10 +332,16 @@ $notifications_result = mysqli_query($conn, $notifications_query);
                                 <?php echo htmlspecialchars($notification['freelancer_name']); ?> applied for "<?php echo htmlspecialchars($notification['job_title']); ?>"
                             </div>
                             <div class="notification-meta">
-                                Applied on: <?php echo date('F j, Y', strtotime($notification['apply_date'])); ?>
+                                Applied on: <?php echo date('F j, Y', strtotime($notification['period_time'])); ?>
                             </div>
                         </div>
-                        <a href="payment/index.php"><button class="btn btn-primary" onclick="startAction(<?php echo $notification['id']; ?>)">Start job</button></a>
+                        <?php if ($notification['status'] == 'pending'): ?>
+                            <a href="payment/index.php?hire_id=<?php echo $notification['hire_id']; ?>">
+                                <button class="btn btn-primary">Pay Now</button>
+                            </a>
+                        <?php else: ?>
+                            <button class="btn btn-secondary" disabled>Paid</button>
+                        <?php endif; ?>
                     </li>
                 <?php endwhile; ?>
             <?php else: ?>
@@ -376,8 +440,6 @@ $notifications_result = mysqli_query($conn, $notifications_query);
 
     function searchFreelancers(event) {
         event.preventDefault();
-        // Add logic to handle searching freelancers and display results
-        // Example:
         var formData = new FormData(event.target);
         fetch('search_freelancers.php', {
             method: 'POST',

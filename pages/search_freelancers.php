@@ -53,23 +53,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hire_result = $conn->query($hire_query);
             $is_hired = $hire_result->num_rows > 0;
 
-            echo "<div class='freelancer-card'>";
-            echo "<div class='freelancer-info'>";
-            echo "<p class='freelancer-name'>Name: " . $freelancer['name'] . "</p>";
-            echo "<p class='freelancer-skills'>Skills: " . $freelancer['skills'] . "</p>";
-            echo "<p class='freelancer-category'>Category: " . $freelancer['category'] . "</p>";
-            echo "<p class='freelancer-location'>Location: " . $freelancer['location'] . "</p>";
-            echo "<p class='freelancer-degree'>Degree: " . $freelancer['degree'] . "</p>";
-            echo "</div>";
+            echo "<div class='freelancer-item'>";
+            echo "<p><strong>Name:</strong> " . htmlspecialchars($freelancer['name']) . "</p>";
+            echo "<p><strong>Skills:</strong> " . htmlspecialchars($freelancer['skills']) . "</p>";
+            echo "<p><strong>Category:</strong> " . htmlspecialchars($freelancer['category']) . "</p>";
+            echo "<p><strong>Location:</strong> " . htmlspecialchars($freelancer['location']) . "</p>";
+            echo "<p><strong>Degree:</strong> " . htmlspecialchars($freelancer['degree']) . "</p>";
             if ($is_hired) {
-                echo "<button class='hire-button' disabled>Hired</button>";
+                echo "<button class='hired-btn' disabled>Hired</button>";
             } else {
-                echo "<button class='hire-button' onclick='hireFreelancer($freelancer_id)'>Hire</button>";
+                echo "<button class='hire-btn' onclick='hireFreelancer($freelancer_id)'>Hire</button>";
             }
             echo "</div>";
         }
     } else {
-        echo "<p>No matches found.</p>";
+        echo "<p class='no-results'>No matches found.</p>";
     }
 
     $conn->close();

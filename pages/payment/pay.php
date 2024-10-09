@@ -1,24 +1,34 @@
 <?php 
 include 'configs.php';
+session_start();
+
+// Define base URL dynamically
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+$host = $_SERVER['HTTP_HOST'];
+$baseUrl = "{$protocol}://{$host}";
+
 if(isset($_POST['pay']))
 {
     $email = $_POST['email'];
     $amount = $_POST['amount'];
     $name = $_POST['name'];
+    $hire_id = $_POST['hire_id'];
 
-    //* Prepare our rave request
+    $_SESSION['current_hire_id'] = $hire_id;
+
     $request = [
         'tx_ref' => time(),
         'amount' => $amount,
         'currency' => 'RWF',
         'payment_options' => 'card',
-        'redirect_url' => 'http://localhost/pages/payment/process.php',
+        'redirect_url' => $baseUrl . '/pages/payment/process.php',
         'customer' => [
             'email' => $email,
             'name' => $name
         ],
         'meta' => [
-            'price' => $amount
+            'price' => $amount,
+            'hire_id' => $hire_id
         ],
         'customizations' => [
             'title' => 'Freelancer Payment',
@@ -26,7 +36,6 @@ if(isset($_POST['pay']))
         ]
     ];
 
-    //* Ca;; f;iterwave emdpoint
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -60,5 +69,4 @@ if(isset($_POST['pay']))
         echo 'We can not process your payment';
     }
 }
-
 ?>
