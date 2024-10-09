@@ -11,14 +11,13 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($_SESSION['employer_user_email']) {
     $email = $_SESSION['employer_user_email'];
     $query = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM employers WHERE email='$email'"));
-    $employer_id = $_SESSION['user_id']; // Assuming you store user_id in the session
+    $employer_id = $_SESSION['user_id']; 
 } else {
     header("Location: employerlogin.html");
     exit();
 }
 $employer_id = $_SESSION['user_id'];
 
-// Add this near the top of the file, after session_start()
 if (isset($_GET['payment'])) {
     $paymentStatus = $_GET['payment'];
     if ($paymentStatus == 'success') {
