@@ -288,6 +288,7 @@ $accepted_hires_result = mysqli_query($conn, $accepted_hires_query);
                 <div class="form-group">
                     <label for="categories">Categories</label>
                     <select id="categories" name="categories">
+                        <option value="">Select a Category</option>
                         <option value="it">IT & Programming</option>
                         <option value="design">Design & Multimedia</option>
                         <option value="writing">Writing & Translation</option>
@@ -303,6 +304,7 @@ $accepted_hires_result = mysqli_query($conn, $accepted_hires_query);
                 <div class="form-group">
                     <label for="location">Location</label>
                     <select id="location" name="location">
+                        <option value="">Select a Location</option>
                         <option value="kigali">Kigali City</option>
                         <option value="north">Northern Province</option>
                         <option value="south">Southern Province</option>
@@ -313,6 +315,7 @@ $accepted_hires_result = mysqli_query($conn, $accepted_hires_query);
                 <div class="form-group">
                     <label for="degree">Degree</label>
                     <select id="degree" name="degree">
+                        <option value="">Select a Degree</option>
                         <option value="highschool">Highschool Graduate</option>
                         <option value="bachelors">Bachelors</option>
                         <option value="masters">Masters</option>
