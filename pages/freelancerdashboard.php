@@ -314,13 +314,62 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['job-type']) && isset($_G
                 echo "<p><strong>Description:</strong> " . htmlspecialchars($notification['job_description']) . "</p>";
                 echo "<div class='notification-actions'>";
                 echo "<form method='post'><input type='hidden' name='job_id' value='" . $notification['job_id'] . "'>";
-                echo "<button type='submit' name='action' value='accept' class='btn btn-success'>Accept</button> ";
-                echo "<button type='submit' name='action' value='reject' class='btn btn-danger'>Reject</button>";
+                echo "<button type='submit' name='action' value='accept' class='accept'>Accept</button> &nbsp";
+                echo "<button type='submit' name='action' value='reject' class='reject'>Reject</button>";
                 echo "</form>";
                 echo "</div></div>";
             }
         } else {
-            echo "<p>No notifications available.</p>";
+            echo "<p>No pending job offers available.</p>";
+        }
+
+        // Fetch hires with status 'start'
+        $hires_query = "SELECT h.*, e.company AS employer_name 
+                        FROM hires h 
+                        JOIN employers e ON h.employer_id = e.id 
+                        WHERE h.freelancer_id = ? AND h.status = 'start'";
+        $stmt = $conn->prepare($hires_query);
+        $stmt->bind_param("i", $freelancer_id);
+        $stmt->execute();
+        $hires_result = $stmt->get_result();
+
+        if ($hires_result->num_rows > 0) {
+            echo "<h3>Jobs Ready to Start</h3>";
+            while ($hire = $hires_result->fetch_assoc()) {
+                echo "<div class='notification-item start-job'>";
+                echo "<p><strong>Job:</strong> " . htmlspecialchars($hire['job_category']) . "</p>";
+                echo "<p><strong>Employer:</strong> " . htmlspecialchars($hire['employer_name']) . "</p>";
+                echo "<p><strong>Payment:</strong> $" . htmlspecialchars($hire['money']) . "</p>";
+                echo "<p><strong>Period:</strong> " . htmlspecialchars($hire['period_time']) . "</p>";
+                echo "<p class='success-message'>You can start this job now!</p>";
+                echo "</div>";
+            }
+        }
+
+        // Fetch applied jobs with status 'start'
+        $applied_jobs_query = "SELECT aj.*, j.job_title, e.company AS employer_name 
+                            FROM applied_jobs aj 
+                            JOIN job_posts j ON aj.job_id = j.id 
+                            JOIN employers e ON aj.employer_id = e.id 
+                            WHERE aj.freelancer_id = ? AND aj.status = 'start'";
+        $stmt = $conn->prepare($applied_jobs_query);
+        $stmt->bind_param("i", $freelancer_id);
+        $stmt->execute();
+        $applied_jobs_result = $stmt->get_result();
+
+        if ($applied_jobs_result->num_rows > 0) {
+            echo "<h3>Accepted Job Applications</h3>";
+            while ($job = $applied_jobs_result->fetch_assoc()) {
+                echo "<div class='notification-item start-job'>";
+                echo "<p><strong>Job:</strong> " . htmlspecialchars($job['job_title']) . "</p>";
+                echo "<p><strong>Employer:</strong> " . htmlspecialchars($job['employer_name']) . "</p>";
+                echo "<p class='success-message'>You were hired! You can start this job now!</p>";
+                echo "</div>";
+            }
+        }
+
+        if ($hires_result->num_rows == 0 && $applied_jobs_result->num_rows == 0) {
+            echo "<p>No jobs ready to start at the moment.</p>";
         }
         ?>
     </div>

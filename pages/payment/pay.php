@@ -13,22 +13,24 @@ if(isset($_POST['pay']))
     $amount = $_POST['amount'];
     $name = $_POST['name'];
     $hire_id = $_POST['hire_id'];
-
+    $type = $_POST['type'];
     $_SESSION['current_hire_id'] = $hire_id;
+    $_SESSION['payment_type'] = $type;
 
     $request = [
         'tx_ref' => time(),
         'amount' => $amount,
         'currency' => 'RWF',
         'payment_options' => 'card',
-        'redirect_url' => $baseUrl . '/pages/payment/process.php',
+        'redirect_url' => $baseUrl . '/Freelance/freelance_marketplace/pages/payment/process.php',
         'customer' => [
             'email' => $email,
             'name' => $name
         ],
         'meta' => [
             'price' => $amount,
-            'hire_id' => $hire_id
+            'hire_id' => $hire_id,
+            'type' => $type
         ],
         'customizations' => [
             'title' => 'Freelancer Payment',

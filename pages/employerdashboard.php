@@ -41,7 +41,7 @@ $notifications_query = "SELECT aj.*, f.name AS freelancer_name, j.job_title AS j
                         FROM applied_jobs aj 
                         JOIN freelancers f ON aj.freelancer_id = f.id 
                         JOIN job_posts j ON aj.job_id = j.id 
-                        WHERE aj.employer_id = $employer_id 
+                        WHERE aj.employer_id = $employer_id AND aj.status IS NULL
                         ORDER BY aj.id DESC";
 $notifications_result = mysqli_query($conn, $notifications_query);
 
@@ -356,7 +356,9 @@ $accepted_hires_result = mysqli_query($conn, $accepted_hires_query);
                             <p><strong>Offered at:</strong> <?php echo date('F j, Y', strtotime($hire['hired_at'])); ?></p>
                         </div>
                     </div>
-                    <a href="payment/index.php"><button class="start-btn" onclick="startAction(<?php echo $hire['id']; ?>)">Start Job</button></a>
+                    <a href="payment/index.php?hire_id=<?php echo $hire['id']; ?>&type=hire">
+                        <button class="start-btn">Start Job</button>
+                    </a>
                 </li>
             <?php endwhile; ?>
         <?php else: ?>
@@ -376,7 +378,9 @@ $accepted_hires_result = mysqli_query($conn, $accepted_hires_query);
                             Applied on: <?php echo date('F j, Y', strtotime($notification['apply_date'])); ?>
                         </div>
                     </div>
-                    <a href="payment/index.php"><button class="start-btn" onclick="startAction(<?php echo $notification['id']; ?>)">Start Job</button></a>
+                    <a href="payment/index.php?hire_id=<?php echo $notification['id']; ?>&type=applied_job">
+                        <button class="start-btn">Start Job</button>
+                    </a>
                 </li>
             <?php endwhile; ?>
         <?php else: ?>

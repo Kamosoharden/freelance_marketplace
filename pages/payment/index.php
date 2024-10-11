@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+$hire_id = isset($_GET['hire_id']) ? intval($_GET['hire_id']) : 0;
+$type = isset($_GET['type']) ? $_GET['type'] : '';
+
+// Add these lines to store the type in the session
+$_SESSION['payment_type'] = $type;
 // Assuming you have a database connection established
 $servername = "localhost";
 $username = "root";
@@ -113,6 +119,7 @@ $hire_id = isset($_GET['hire_id']) ? intval($_GET['hire_id']) : 0;
         <label for="amount">Amount (RWF)</label>
         <input type="number" id="amount" name="amount" placeholder="Enter the amount" required>
         </div>
+        <input type="hidden" id="type" name="type" value="<?php echo htmlspecialchars($type); ?>" required>
 
         <div class="button-container">
             <input type="submit" name="pay" value="Send Payment">
