@@ -66,8 +66,8 @@
             <label for="profile-description">Profile Description</label>
             <textarea id="profile-description" name="profile_description" rows="8" required></textarea>
     
-            <label for="degree">Degree</label>
-            <select id="degree" name="degree">
+            <label for="degree" class="freelancer-only">Degree</label>
+            <select id="degree" name="degree" class="freelancer-only">
                 <option value="highschool">Highschool Graduate</option>
                 <option value="bachelors">Bachelors</option>
                 <option value="masters">Masters</option>
@@ -75,8 +75,8 @@
                 <option value="none">None of the above</option>
             </select>
     
-            <label for="location">Location</label>
-            <select id="location" name="location">
+            <label for="location" class="freelancer-only">Location</label>
+            <select id="location" name="location" class="freelancer-only">
                 <option value="kigali">Kigali City</option>
                 <option value="north">Northern Province</option>
                 <option value="south">Southern Province</option>
@@ -84,8 +84,8 @@
                 <option value="west">Western Province</option>
             </select>
 
-            <label for="categories">Categories</label>
-            <select id="categories" name="categories" required>
+            <label for="categories" class="freelancer-only">Categories</label>
+            <select id="categories" class="freelancer-only" name="categories" required>
                 <option value="it">IT & Programming</option>
                 <option value="design">Design & Multimedia</option>
                 <option value="writing">Writing & Translation</option>
@@ -99,7 +99,7 @@
             </select>
     
             <label for="skills" class="freelancer-only">Skills</label>
-            <textarea id="skills" name="skills" rows="8" required></textarea>
+            <textarea id="skills" name="skills" rows="8" class="freelancer-only"></textarea>
     
             <label for="company-name" class="employer-only">Company Name</label>
             <input type="text" id="company-name" name="company_name" class="employer-only">
