@@ -22,7 +22,7 @@ if(isset($_POST['pay']))
         'amount' => $amount,
         'currency' => 'RWF',
         'payment_options' => 'card',
-        'redirect_url' => $baseUrl . '/Freelance/freelance_marketplace/pages/payment/process.php',
+        'redirect_url' => $baseUrl . '/freelance_marketplace/pages/payment/process.php',
         'customer' => [
             'email' => $email,
             'name' => $name
